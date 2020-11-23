@@ -34,8 +34,8 @@ public class Robot {
      * 
      * @return If the Up movement has been performed
      */
-    public void moveUp() {
-        this.moveToPosition(environment.getCurrPosX(), this.environment.getCurrPosY() + Robot.MOVEMENT_DELTA);
+    public boolean moveUp() throws PositionOutOfBoundException{
+        return this.moveToPosition(environment.getCurrPosX(), this.environment.getCurrPosY() + Robot.MOVEMENT_DELTA);
     }
 
     /**
@@ -43,8 +43,8 @@ public class Robot {
      * 
      * @return If the Down movement has been performed
      */
-    public void moveDown() {
-        this.moveToPosition(this.environment.getCurrPosX(), environment.getCurrPosY() - Robot.MOVEMENT_DELTA);
+    public boolean moveDown() throws PositionOutOfBoundException {
+        return this.moveToPosition(this.environment.getCurrPosX(), environment.getCurrPosY() - Robot.MOVEMENT_DELTA);
     }
 
     /**
@@ -52,8 +52,8 @@ public class Robot {
      * 
      * @return A boolean indicating if the Left movement has been performed
      */
-    public void moveLeft() {
-        this.moveToPosition(this.environment.getCurrPosX() - Robot.MOVEMENT_DELTA,
+    public boolean moveLeft() {
+        return this.moveToPosition(this.environment.getCurrPosX() - Robot.MOVEMENT_DELTA,
                 this.environment.getCurrPosY());
     }
 
@@ -62,8 +62,8 @@ public class Robot {
      * 
      * @return A boolean indicating if the Right movement has been performed
      */
-    public void moveRight() {
-       this.moveToPosition(this.environment.getCurrPosX() + Robot.MOVEMENT_DELTA,
+    public boolean moveRight() {
+       return this.moveToPosition(this.environment.getCurrPosX() + Robot.MOVEMENT_DELTA,
                 this.environment.getCurrPosY());
     }
 

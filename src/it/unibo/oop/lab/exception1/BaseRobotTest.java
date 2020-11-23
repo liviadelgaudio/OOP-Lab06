@@ -2,7 +2,9 @@ package it.unibo.oop.lab.exception1;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
@@ -33,9 +35,16 @@ public final class BaseRobotTest {
         /*
          * 2) Move the robot right until it touches the world limit
          */
-        for (int i = 0; i < RobotEnvironment.WORLD_X_UPPER_LIMIT; i++) {
+        try {
+        	for (int i = 0; i < RobotEnvironment.WORLD_X_UPPER_LIMIT; i++) {
             // check if position if coherent
             assertTrue("[CHECKING MOVING RIGHT]", r1.moveRight());
+        	}
+        }
+        	r1.moveRight();
+        	fail();
+        catch (PositionOutOfBoundException e) {
+        	assertNotNull(e.getMessage());
         }
         // reached the right limit of the world
         assertFalse("[CHECKING MOVING RIGHT]", r1.moveRight());
@@ -45,9 +54,13 @@ public final class BaseRobotTest {
         /*
          * 2) Move to the top until it reaches the upper right conrner of the world
          */
-        for (int i = 0; i < RobotEnvironment.WORLD_Y_UPPER_LIMIT; i++) {
+        try {
+        	for (int i = 0; i < RobotEnvironment.WORLD_Y_UPPER_LIMIT; i++) {
             // check if position if coherent
             assertTrue("[CHECKING MOVING UP]", r1.moveUp());
+        	}
+        } catch (PositionOutOfBoundException e) {
+        	assertNotNull(e.getMessage());
         }
         // reached the upper limit of the world
         assertFalse("[CHECKING MOVING UP]", r1.moveUp());
