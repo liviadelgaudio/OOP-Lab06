@@ -34,44 +34,56 @@ public class StrictBankAccount implements BankAccount {
     /**
      * 
      * {@inheritDoc}
+     * @throws WrongAccountHolderException 
      */
     public void deposit(final int usrID, final double amount) {
         if (checkUser(usrID)) {
             this.balance += amount;
             incTransactions();
         }
+        else throw new WrongAccountHolderException(); 
     }
 
     /**
      * 
      * {@inheritDoc}
+     * @throws WrongAccountHolderException
+     * @throws NotEnoughFoundsException 
+     *  
      */
     public void withdraw(final int usrID, final double amount) {
-        if (checkUser(usrID) && isWithdrawAllowed(amount)) {
-            this.balance -= amount;
-            incTransactions();
+        if (checkUser(usrID)) {
+        	if (isWithdrawAllowed(amount)) {
+        		this.balance -= amount;
+        		incTransactions();
+        	}
+        	else throw new NotEnoughFoundsException();
         }
+        else throw new WrongAccountHolderException();
     }
 
     /**
      * 
      * {@inheritDoc}
+     * @throws TransactionsOverQuotaException
      */
     public void depositFromATM(final int usrID, final double amount) {
         if (nTransactions < nMaxATMTransactions) {
             this.deposit(usrID, amount - StrictBankAccount.ATM_TRANSACTION_FEE);
             nTransactions++;
         }
+        else throw new TransactionsOverQuotaException();
     }
 
     /**
      * 
-     * {@inheritDoc}
+     * {@inheritDoc} 
      */
     public void withdrawFromATM(final int usrID, final double amount) {
         if (nTransactions < nMaxATMTransactions) {
             this.withdraw(usrID, amount + StrictBankAccount.ATM_TRANSACTION_FEE);
         }
+        else throw new TransactionsOverQuotaException();
     }
 
     /**
@@ -94,13 +106,19 @@ public class StrictBankAccount implements BankAccount {
      * 
      * @param usrID
      *            id of the user related to these fees
+     * @throws WrongAccountHolderException 
+     * @throws NotEnoughFoundsException
      */
     public void computeManagementFees(final int usrID) {
         final double feeAmount = MANAGEMENT_FEE + (nTransactions * StrictBankAccount.TRANSACTION_FEE);
-        if (checkUser(usrID) && isWithdrawAllowed(feeAmount)) {
-            balance -= MANAGEMENT_FEE + nTransactions * StrictBankAccount.TRANSACTION_FEE;
-            nTransactions = 0;
+        if (checkUser(usrID)) {
+        	if (isWithdrawAllowed(feeAmount)) {
+        		balance -= MANAGEMENT_FEE + nTransactions * StrictBankAccount.TRANSACTION_FEE;
+        		nTransactions = 0;
+        	}
+        	else throw new NotEnoughFoundsException();
         }
+        else throw new WrongAccountHolderException();
     }
 
     private boolean checkUser(final int id) {

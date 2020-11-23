@@ -10,7 +10,7 @@ public interface BankAccount {
      * @param usrID
      *            id of the user requesting this operation
      * @param amount
-     *            amount to be withdrawn
+     *            amount to be withdrawn 
      */
     void withdraw(int usrID, double amount);
 
@@ -37,7 +37,7 @@ public interface BankAccount {
      * @param usrID
      *            id of the user requesting this opera
      * @param amount
-     *            amount to be withdrawn via AT
+     *            amount to be withdrawn via ATM 
      */
     void withdrawFromATM(int usrID, double amount);
 
