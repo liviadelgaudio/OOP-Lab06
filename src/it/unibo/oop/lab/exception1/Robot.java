@@ -34,7 +34,7 @@ public class Robot {
      * 
      * @return If the Up movement has been performed
      */
-    public boolean moveUp() throws PositionOutOfBoundException{
+    public boolean moveUp() throws PositionOutOfBoundException, NotEnoughBatteryException{
         return this.moveToPosition(environment.getCurrPosX(), this.environment.getCurrPosY() + Robot.MOVEMENT_DELTA);
     }
 
@@ -43,7 +43,7 @@ public class Robot {
      * 
      * @return If the Down movement has been performed
      */
-    public boolean moveDown() throws PositionOutOfBoundException {
+    public boolean moveDown() throws PositionOutOfBoundException, NotEnoughBatteryException {
         return this.moveToPosition(this.environment.getCurrPosX(), environment.getCurrPosY() - Robot.MOVEMENT_DELTA);
     }
 
@@ -95,19 +95,11 @@ public class Robot {
                       + ") the robot is touching at least one world boundary");
         		return false;
         	}
-//            try {
-//            	this.environment.move(newX, newY);
-//            } catch (final PositionOutOfBoundException e){ 
-//            	this.log("Can not move to (" + newX + "," + newY
-//                        + ") the robot is touching at least one world boundary");
-//            }
-//            
-//              this.consumeBatteryForMovement();
-//              this.log("Moved to position(" + newX + "," + newY + ")."); 
             
         } else {
             this.log("Can not move to position(" + newX + "," + newY + "). Not enough battery.");
-            return false;
+            throw new NotEnoughBatteryException(this);
+            //return false;
         }
     }	
 
