@@ -15,7 +15,7 @@ public interface Graph<N> {
      * @param node
      *            the node to add
      */
-    void addNode(N node);
+    void addNode(N node); 
 
     /**
      * Adds an edge: nothing happens if source or target are null.
