@@ -30,28 +30,6 @@ public class TestStrictBankAccount {
          * operazioni ATM gratuite.
          */
     	
-//    	try {
-//			acc1.deposit(1233, 100);
-//		} catch (WrongAccountHolderException e) {
-//			e.toString();
-//		}
-//    	
-//    	try {
-//    		acc2.withdraw(3478, 10001);
-//    	} catch (NotEnoughFoundsException e) {
-//    		e.toString();
-//    	}
-//    	
-//    	try {
-//    		for(int i=0; i <= 10; i++) {
-//    			acc1.withdrawFromATM(1234, 1000);
-//    		}
-//    	} catch(TransactionsOverQuotaException e) {
-//    		e.toString();
-//    	} catch(NotEnoughFoundsException e) {
-//    		e.toString();
-//    	}
-    	
     	try {
 			acc1.deposit(1233, 100);
 			acc2.withdraw(3478, 10001);
