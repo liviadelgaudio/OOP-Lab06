@@ -21,8 +21,8 @@ public class TestStrictBankAccount {
     	AccountHolder user1 = new AccountHolder("Mario", "Rossi", 1234);
     	AccountHolder user2 = new AccountHolder("Sara", "Lolli", 3478);
     	
-    	StrictBankAccount acc1 = new StrictBankAccount(1234, 10000, 10);
-    	StrictBankAccount acc2 = new StrictBankAccount(3478, 10000, 10);
+    	StrictBankAccount acc1 = new StrictBankAccount(user1.getUserID(), 10000, 10);
+    	StrictBankAccount acc2 = new StrictBankAccount(user2.getUserID(), 10000, 10);
     	
          /* 2) Effetture un numero di operazioni a piacere per verificare che le
          * eccezioni create vengano lanciate soltanto quando opportuno, cioè in
@@ -31,12 +31,12 @@ public class TestStrictBankAccount {
          */
     	
     	try {
-			acc1.deposit(1233, 100);
-			acc2.withdraw(3478, 10001);
-			for(int i=0; i <= 10; i++) {
+		acc1.deposit(1233, 100);
+		acc2.withdraw(3478, 10001);
+		for(int i=0; i <= 10; i++) {
     			acc1.withdrawFromATM(1234, 1000);
-			}
-		} catch (WrongAccountHolderException e) {
+		}
+	} catch (WrongAccountHolderException e) {
 			e.toString();
     	} catch (NotEnoughFoundsException e) {
     		e.toString();

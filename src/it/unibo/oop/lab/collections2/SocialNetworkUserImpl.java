@@ -66,8 +66,8 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
 	}
 	
 	public SocialNetworkUserImpl(final String name, final String surname, final String user, final int userAge) {
-        super(name, surname, user, userAge);
-        this.friends = new HashMap<>();
+                super(name, surname, user, userAge);
+                this.friends = new HashMap<>();
     }
 
     /*
@@ -85,6 +85,7 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
     	}
     	return userGroup.add(user);
     }
+
     @Override
     public Collection<U> getFollowedUsersInGroup(final String groupName) {
         final Set<U> group = this.friends.get(groupName) ;
